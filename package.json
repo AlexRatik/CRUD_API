@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3",
+    "uuid": "^8.3.2"
+  },
+  "name": "crud_api",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:prod": "tsc && node dist/index.js",
+    "start:dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexRatik/CRUD_API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexRatik/CRUD_API/issues"
+  },
+  "homepage": "https://github.com/AlexRatik/CRUD_API#readme",
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/uuid": "^8.3.4",
+    "nodemon": "^2.0.16"
+  }
+}
