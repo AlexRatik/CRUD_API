@@ -12,7 +12,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "tsc && node dist/index.js",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "start:multi": "tsc && node dist/cluster.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^18.0.0",
     "@types/uuid": "^8.3.4",
+    "jest": "^28.1.1",
     "nodemon": "^2.0.16"
   }
 }
