@@ -10,7 +10,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start:prod": "tsc && node dist/index.js",
     "start:dev": "nodemon",
     "start:multi": "tsc && node dist/cluster.js"
@@ -27,9 +27,13 @@
   },
   "homepage": "https://github.com/AlexRatik/CRUD_API#readme",
   "devDependencies": {
+    "@types/jest": "^28.1.2",
     "@types/node": "^18.0.0",
+    "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
     "jest": "^28.1.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3",
+    "ts-jest": "^28.0.5"
   }
 }

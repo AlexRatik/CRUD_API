@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { ERRORS } from "./enums/errorEnum";
 import { IUser } from "./interfaces/IUser";
 import { userIsValid } from "./validators/userIsValid";
 
@@ -22,7 +23,7 @@ export class DataBase {
             return { ...newUser };
         } else {
             return {
-                error: "Not all fields filled!",
+                error: ERRORS.NOT_ALL_FIELDS_ARE_FILLED,
             };
         }
     }
@@ -31,7 +32,7 @@ export class DataBase {
         const userIndex = this.users.findIndex((user) => user.id === id);
         if (userIndex < 0) {
             return {
-                error: "No user with such id",
+                error: ERRORS.NO_SUCH_USER,
             };
         }
         const updatedUser = { ...this.users[userIndex], ...data };

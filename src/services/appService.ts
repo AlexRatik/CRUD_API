@@ -3,6 +3,7 @@ import { DataBase } from "../dataBase";
 import { sendResponse } from "./sendResponse";
 import { METHODS } from "../enums/methods";
 import { isIDValid } from "../validators/idIsValid";
+import { ERRORS } from "../enums/errorEnum";
 
 const DATABASE = new DataBase();
 export const appService = (req: IncomingMessage, res: ServerResponse) => {
@@ -11,7 +12,7 @@ export const appService = (req: IncomingMessage, res: ServerResponse) => {
         const id = req.url?.split("/")[3] || "";
 
         if (!req.url?.startsWith(baseURL)) {
-            sendResponse(res, 404, { error: "Page not found" });
+            sendResponse(res, 404, { error: ERRORS.PAGE_NOT_FOUND });
             return;
         }
         switch (req.method) {
@@ -23,14 +24,14 @@ export const appService = (req: IncomingMessage, res: ServerResponse) => {
                     if (isIDValid(id)) {
                         const user = DATABASE.getUserById(id);
                         if (user) {
-                            sendResponse(res, 200, { data: user });
+                            sendResponse(res, 200, { ...user });
                         } else {
                             sendResponse(res, 404, {
-                                error: `User with id ${id} doesn't exists`,
+                                error: ERRORS.NO_SUCH_USER,
                             });
                         }
                     } else {
-                        sendResponse(res, 400, { error: "Invalid ID" });
+                        sendResponse(res, 400, { error: ERRORS.INVALID_ID });
                     }
                 }
                 break;
@@ -38,7 +39,7 @@ export const appService = (req: IncomingMessage, res: ServerResponse) => {
             case METHODS.POST: {
                 if (req.url !== baseURL) {
                     sendResponse(res, 400, {
-                        error: "No such opportunity at this URL",
+                        error: ERRORS.NO_OPPORTUNITY,
                     });
                 } else {
                     let body = "";
@@ -74,7 +75,7 @@ export const appService = (req: IncomingMessage, res: ServerResponse) => {
                         }
                     });
                 } else {
-                    sendResponse(res, 400, { error: "Invalid ID" });
+                    sendResponse(res, 400, { error: ERRORS.INVALID_ID });
                 }
                 break;
             }
@@ -84,16 +85,16 @@ export const appService = (req: IncomingMessage, res: ServerResponse) => {
                         sendResponse(res, 204, {});
                     } else {
                         sendResponse(res, 404, {
-                            error: `User with id ${id} doesn't exists`,
+                            error: ERRORS.NO_SUCH_USER,
                         });
                     }
                 } else {
-                    sendResponse(res, 400, { error: "Invalid ID" });
+                    sendResponse(res, 400, { error: ERRORS.INVALID_ID });
                 }
                 break;
             }
             default: {
-                sendResponse(res, 404, { error: "Page not found" });
+                sendResponse(res, 404, { error: ERRORS.PAGE_NOT_FOUND });
             }
         }
     } catch (e) {
